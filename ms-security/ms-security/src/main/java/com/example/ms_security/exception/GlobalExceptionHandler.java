@@ -2,6 +2,7 @@ package com.example.ms_security.exception;
 
 import com.example.ms_security.dto.ErrorResponse;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -24,4 +25,13 @@ public class GlobalExceptionHandler {
         return ErrorResponse.builder()
                 .message(ex.getMessage()).build();
     }
+
+    @ExceptionHandler(CustomFeignException.class)
+    @ResponseStatus()
+    public ResponseEntity<ErrorResponse> handleCustomFeignException(CustomFeignException ex){
+        return ResponseEntity
+                .status(ex.getErrorResponse().getCode())
+                .body(ex.getErrorResponse());
+    }
+
 }

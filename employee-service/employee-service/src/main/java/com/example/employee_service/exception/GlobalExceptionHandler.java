@@ -18,7 +18,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleMethodArgumentNotValidException(HttpServletRequest request,MethodArgumentNotValidException ex) {
         ArrayList<String> errors = new ArrayList<>();
-        ex.getAllErrors().forEach(error -> errors.add(error.getDefaultMessage()));
+        ex.getBindingResult().getAllErrors().forEach(error -> errors.add(error.getDefaultMessage()));
         return ErrorResponse.builder()
                 .message(("Validation error happened."))
                 .status(400)

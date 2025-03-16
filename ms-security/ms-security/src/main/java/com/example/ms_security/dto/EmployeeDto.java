@@ -1,5 +1,6 @@
 package com.example.ms_security.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Getter

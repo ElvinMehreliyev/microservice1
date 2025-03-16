@@ -24,19 +24,26 @@ public class SecurityServiceImpl implements SecurityService {
     private AuthenticationManager authenticationManager;
 
     @Override
-    public String register(EmployeeDto employeeDto) throws Exception {
-        System.out.println("hi 1");
+    public String register(EmployeeDto employeeDto) {
         if(employeeClient.getEmployeeDtoByEmail(employeeDto.getEmail())!=null){
             throw new UserAlreadyExistException("User already exist");
         }
-        String encodedPassword=passwordEncoder.encode(employeeDto.getPassword());
+        String encodedPassword;
+        if(employeeDto.getPassword()!=null && !employeeDto.getPassword().isEmpty()){
+            encodedPassword=passwordEncoder.encode(employeeDto.getPassword());
+        }
+        else{
+            encodedPassword=null;
+        }
+
         employeeClient.saveEmployee(EmployeeDto.builder()
-                        .id(employeeDto.getId())
-                        .departmentCode(employeeDto.getDepartmentCode())
-                        .email(employeeDto.getEmail())
-                        .firstName(employeeDto.getFirstName())
-                        .lastName(employeeDto.getLastName())
-                        .password(encodedPassword).build());
+                .id(employeeDto.getId())
+                .departmentCode(employeeDto.getDepartmentCode())
+                .email(employeeDto.getEmail())
+                .firstName(employeeDto.getFirstName())
+                .lastName(employeeDto.getLastName())
+                .password(encodedPassword).build());
+
         return "User registered!";
     }
 
@@ -49,7 +56,6 @@ public class SecurityServiceImpl implements SecurityService {
             return jwtUtil.generateToken(authRequest.getEmail());
         }
         else {
-
          throw new UsernameNotFoundException("User not found!");
         }
     }
