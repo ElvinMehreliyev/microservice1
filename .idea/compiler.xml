@@ -3,7 +3,17 @@
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
-      <profile name="Annotation profile for order-service" enabled="true">
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="stock-service" />
+        <module name="base-domains" />
+        <module name="order-service" />
+        <module name="order-service (1)" />
+        <module name="order-service (2)" />
+      </profile>
+      <profile name="Annotation profile for email-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -12,14 +22,6 @@
         </processorPath>
         <module name="email-service" />
       </profile>
-      <profile name="Maven default annotation processors profile" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="stock-service" />
-        <module name="base-domains" />
-        <module name="order-service" />
-      </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
@@ -27,6 +29,8 @@
       <module name="base-domains" options="-parameters" />
       <module name="email-service" options="-parameters" />
       <module name="order-service" options="-parameters" />
+      <module name="order-service (1)" options="-parameters" />
+      <module name="order-service (2)" options="-parameters" />
       <module name="stock-service" options="-parameters" />
     </option>
   </component>
